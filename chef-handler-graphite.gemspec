@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "chef-handler-graphite"
-  s.version     = "0.0.5"
+  s.version     = "1.0.0"
   s.authors     = ["Ian Meyer"]
   s.email       = ["ianmmeyer@gmail.com"]
   s.homepage    = ""

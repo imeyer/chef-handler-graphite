@@ -23,6 +23,7 @@ require "chef"
 require "chef/handler"
 
 class GraphiteReporting < Chef::Handler
+  attr_writer :metric_key, :graphite_host, :graphite_port
 
   def initialize(options = {})
     @metric_key = options[:metric_key]
