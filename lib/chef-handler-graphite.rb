@@ -21,6 +21,7 @@ Gem.clear_paths
 require "simple-graphite"
 require "chef"
 require "chef/handler"
+require "chef-handler-graphite/version"
 
 class GraphiteReporting < Chef::Handler
   attr_writer :metric_key, :graphite_host, :graphite_port
@@ -32,13 +33,7 @@ class GraphiteReporting < Chef::Handler
   end
 
   def report
-    gemspec = if Gem::Specification.respond_to? :find_by_name
-      Gem::Specification.find_by_name('chef-handler-graphite')
-    else
-      Gem.source_index.find_name('chef-handler-graphite').last
-    end
-
-    Chef::Log.debug("#{gemspec.full_name} loaded as a handler.")
+    Chef::Log.debug("chef-handler-graphite-#{ChefHandlerGraphite::VERSION} loaded as a handler.")
 
     g = Graphite.new
     g.host = @graphite_host
