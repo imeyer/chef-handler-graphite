@@ -45,8 +45,8 @@ class GraphiteReporting < Chef::Handler
     g.port = @graphite_port
 
     metrics = Hash.new
-    metrics[:updated_resources] = run_status.updated_resources.length
-    metrics[:all_resources] = run_status.all_resources.length
+    metrics[:updated_resources] = run_status.updated_resources.length if run_status.updated_resources
+    metrics[:all_resources] = run_status.all_resources.length if run_status.all_resources
     metrics[:elapsed_time] = run_status.elapsed_time
 
     if run_status.success?
