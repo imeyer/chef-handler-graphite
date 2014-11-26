@@ -57,6 +57,10 @@ class GraphiteReporting < Chef::Handler
       metrics[:fail] = 1
     end
 
+    # user provided metrics
+    user_metrics = run_status.run_context['graphite-handler-metrics']
+    metrics.merge!(user_metrics) if user_metrics.is_a?(Hash)
+
     g.push_to_graphite do |graphite|
       metrics.each do |metric, value|
         Chef::Log.debug("#{@metric_key}.#{metric} #{value} #{g.time_now}")
