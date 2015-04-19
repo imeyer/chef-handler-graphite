@@ -26,9 +26,9 @@ class GraphiteReporting < Chef::Handler
   attr_writer :metric_key, :graphite_host, :graphite_port
 
   def initialize(options = {})
-    @metric_key = options[:metric_key]
-    @graphite_host = options[:graphite_host]
-    @graphite_port = options[:graphite_port]
+    @metric_key = options[:metric_key] || options["metric_key"]
+    @graphite_host = options[:graphite_host] || options["graphite_host"]
+    @graphite_port = options[:graphite_port] || options["graphite_port"]
   end
 
   def report
