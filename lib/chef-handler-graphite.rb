@@ -60,7 +60,11 @@ class GraphiteReporting < Chef::Handler
     g.push_to_graphite do |graphite|
       metrics.each do |metric, value|
         Chef::Log.debug("#{@metric_key}.#{metric} #{value} #{g.time_now}")
-        graphite.puts "#{@metric_key}.#{metric} #{value} #{g.time_now}"
+        begin
+          graphite.puts "#{@metric_key}.#{metric} #{value} #{g.time_now}"
+        rescue SocketError => e
+          Chef::Log.warn("Impossible to push metric because of #{e.class.name} #{e.message}")
+        end
       end
     end
   end
